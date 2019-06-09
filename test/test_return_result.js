@@ -24,11 +24,32 @@ const tests = [
   },
 ];
 
+test('A callback or promise function is required', ({end, throws}) => {
+  throws(
+    () => returnResult({}),
+    new Error('ExpectedCbkOrPromiseFunctionsToReturnResult')
+  );
+
+  return end();
+});
+
 tests.forEach(({args, description, error, expected, result}) => {
-  return test(description, ({deepEqual, end, equal}) => {
+  const promise = (err, resolution) => new Promise((resolve, reject) => {
+    return returnResult({reject, resolve, of: args.of})(err, resolution);
+  });
+
+  return test(description, async ({deepEqual, end, equal, rejects}) => {
+    // Promise methods
+    if (!error) {
+      equal(await promise(null, {foo: result.res}), expected);
+    } else {
+      rejects(promise(error), result.err);
+    }
+
+    // Callback methods
     return returnResult(args, (err, res) => {
-      deepEqual(err, error);
-      equal(res, expected);
+      deepEqual(err, error, 'Callback returns error');
+      equal(res, expected, 'Callback returns result');
 
       return end();
     })(result.err, {foo: result.res});
