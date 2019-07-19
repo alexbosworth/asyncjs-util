@@ -7,6 +7,7 @@
     [reject]: <Promise Reject Function>
     [resolve]: <Promise Resolve Function>
   }
+  [cbk]: <Callback Function>
 
   @returns
   <Function> (err, res) => {}
