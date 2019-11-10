@@ -2,6 +2,10 @@
 
 Utility methods for working with [asyncjs](http://caolan.github.io/async/v3/)
 
+[![npm version](https://badge.fury.io/js/asyncjs-util.svg)](https://badge.fury.io/js/asyncjs-util)
+[![Coverage Status](https://coveralls.io/repos/github/alexbosworth/asyncjs-util/badge.svg?branch=master)](https://coveralls.io/github/alexbosworth/asyncjs-util?branch=master)
+[![Build Status](https://travis-ci.org/alexbosworth/asyncjs-util.svg?branch=master)](https://travis-ci.org/alexbosworth/asyncjs-util)
+
 ## returnResult
 
 Return a specific result of an async/auto process
