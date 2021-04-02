@@ -1,4 +1,4 @@
-const {test} = require('@alexbosworth/tap');
+const {test} = require('tap');
 
 const {returnResult} = require('./../');
 
@@ -6,8 +6,9 @@ const tests = [
   {
     args: {of: 'foo'},
     description: 'Return a specific result',
+    error: null,
     expected: 'bar',
-    result: {err: null, res: 'bar'},
+    result: {err: undefined, res: 'bar'},
   },
   {
     args: {},
@@ -38,17 +39,17 @@ tests.forEach(({args, description, error, expected, result}) => {
     return returnResult({reject, resolve, of: args.of})(err, resolution);
   });
 
-  return test(description, async ({deepEqual, end, equal, rejects}) => {
+  return test(description, async ({end, equal, rejects, strictSame}) => {
     // Promise methods
     if (!error) {
       equal(await promise(null, {foo: result.res}), expected);
     } else {
-      rejects(promise(error), result.err);
+      await rejects(promise(error), result.err);
     }
 
     // Callback methods
     return returnResult(args, (err, res) => {
-      deepEqual(err, error, 'Callback returns error');
+      strictSame(err, error, 'Callback returns error');
       equal(res, expected, 'Callback returns result');
 
       return end();

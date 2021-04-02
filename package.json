@@ -8,7 +8,7 @@
     "async": "3.2.0"
   },
   "devDependencies": {
-    "@alexbosworth/tap": "14.10.9"
+    "tap": "15.0.1"
   },
   "keywords": [
     "asyncjs"
@@ -19,10 +19,10 @@
   "name": "asyncjs-util",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/alexbosworth/asyncjs-util.git"
+    "url": "https://github.com/alexbosworth/asyncjs-util.git"
   },
   "scripts": {
     "test": "tap test/*.js"
   },
-  "version": "1.2.4"
+  "version": "1.2.5"
 }
