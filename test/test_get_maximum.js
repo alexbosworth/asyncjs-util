@@ -1,4 +1,6 @@
-const {test} = require('@alexbosworth/tap');
+const {deepStrictEqual} = require('node:assert').strict;
+const {rejects} = require('node:assert').strict;
+const test = require('node:test');
 
 const getMaximum = require('./../get_maximum');
 
@@ -55,15 +57,15 @@ const tests = [
 ];
 
 tests.forEach(({args, description, error, expected}) => {
-  return test(description, async ({end, equal, rejects}) => {
+  return test(description, async () => {
     if (!!error) {
-      rejects(getMaximum(args, args.test), error, 'Got expected error');
+      await rejects(getMaximum(args, args.test), error, 'Got expected error');
     } else {
       const {maximum} = await getMaximum(args, args.test);
 
-      equal(maximum, expected.maximum, 'Got expected value');
+      deepStrictEqual(maximum, expected.maximum, 'Got expected value');
     }
 
-    return end();
+    return;
   });
 });

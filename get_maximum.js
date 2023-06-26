@@ -84,7 +84,7 @@ module.exports = ({accuracy, from, to}, test, cbk) => {
               return cbk(null, {});
             }
 
-            cbk(null, {maximum: lowerBound})
+            return cbk(null, {maximum: lowerBound})
           }
         );
       }],
